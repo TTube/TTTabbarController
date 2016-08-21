@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UIBaseViewController.h"
 #import "TTTabBarController.h"
+#import "TTTabbar.h"
 #import "TTTabbarItemButton.h"
 @interface AppDelegate ()
 
@@ -24,21 +25,20 @@
     UIBaseViewController *bsaeVC2 = [[UIBaseViewController alloc] initWithNibName:@"UIBaseViewController" bundle:nil];
     bsaeVC2.title = @"发现";
     UIBaseViewController *bsaeVC3 = [[UIBaseViewController alloc] initWithNibName:@"UIBaseViewController" bundle:nil];
-    bsaeVC3.title = @"朋友";
-    UIBaseViewController *bsaeVC4 = [[UIBaseViewController alloc] initWithNibName:@"UIBaseViewController" bundle:nil];
-    bsaeVC4.title = @"我";
+    bsaeVC3.title = @"探索";
+    
     UINavigationController *navi1 = [[UINavigationController alloc] initWithRootViewController:bsaeVC1];
     UINavigationController *navi2 = [[UINavigationController alloc] initWithRootViewController:bsaeVC2];
     UINavigationController *navi3 = [[UINavigationController alloc] initWithRootViewController:bsaeVC3];
-    UINavigationController *navi4 = [[UINavigationController alloc] initWithRootViewController:bsaeVC4];
     NSUInteger index = 0;
-    NSArray *controllerArr = @[navi1,navi2,navi3,navi4];
+    NSArray *controllerArr = @[navi1,navi2,navi3];
     TTTabBarController *tabbarController = [[TTTabBarController alloc] init];
     for (UIViewController *controller in controllerArr) {
         TTTabbarItemButtonConfig *config = [self makeConfigWithIndex:index];
         [tabbarController addController:controller withTabBarConfig:config];
         index ++;
     }
+    tabbarController.TT_tabBar.showTopLine = NO;
     self.window.rootViewController = tabbarController;
     [self.window makeKeyAndVisible];
     return YES;
@@ -50,9 +50,8 @@
     if(!configArr){
         configArr = @[
                       @[@"首页",@"home_normal",@"home_highlight_large"],
-                      @[@"股市",@"mycity_normal",@"mycity_highlight"],
-                      @[@"基金",@"message_normal",@"message_highlight"],
-                      @[@"我",@"account_normal",@"account_highlight"],
+                      @[@"发现",@"mycity_normal",@"mycity_highlight"],
+                      @[@"探索",@"message_normal",@"message_highlight"],
                       ];
     }
     TTTabbarItemButtonConfig *config = [[TTTabbarItemButtonConfig alloc] init];
@@ -62,6 +61,7 @@
     config.title = configArr[index][0];
     config.normalImage = [UIImage imageNamed:configArr[index][1]];
     config.selectedImage = [UIImage imageNamed:configArr[index][2]];
+    config.specialHeight = index == 1 ? 64 : 0;
     return config;
 }
 

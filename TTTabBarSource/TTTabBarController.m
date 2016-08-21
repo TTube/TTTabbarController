@@ -48,13 +48,21 @@
 #pragma mark - public
 - (void)refreshView
 {
+    [self refreshView:NO];
+}
+
+- (void)refreshView:(BOOL)force
+{
+    if ([self.viewControllers isEqualToArray:self.controllerArr] && !force){
+        return;
+    }
     [self setViewControllers:self.controllerArr animated:NO];
     for (UIView *subView in self.tabBar.subviews) {
         if(![subView isKindOfClass:NSClassFromString(@"TTTabbar")]){
             [subView removeFromSuperview];
         }
     }
-    [self.tabBar bringSubviewToFront:self.TT_tabBar];
+   [self.tabBar bringSubviewToFront:self.TT_tabBar];
     self.TT_tabBar.alpha = 1;
     self.selectedIndex = self.defaultIndex;
     NSMutableArray *itemsArr = [NSMutableArray array];
@@ -129,7 +137,7 @@
         _TT_tabBar.showTopLine = YES;
         [self.tabBar addSubview:_TT_tabBar];
         _TT_tabBar.frame = self.tabBar.bounds;
-        _TT_tabBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _TT_tabBar.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _TT_tabBar.tabBarDelegate = self;
     }
     return _TT_tabBar;
@@ -141,6 +149,7 @@
         _TT_tabBar = TT_tabBar;
     }
 }
+
 
 - (NSMutableArray *)configArr
 {

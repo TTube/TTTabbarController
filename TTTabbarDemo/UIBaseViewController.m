@@ -7,6 +7,7 @@
 //
 
 #import "UIBaseViewController.h"
+#import "UIViewController+TTTabbar.h"
 @interface UIBaseViewController ()
 
 @end
@@ -15,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view from its nib.
 }
@@ -25,6 +27,7 @@
 }
 - (IBAction)clickPush:(id)sender {
     UIBaseViewController *baseViewController = [[UIBaseViewController alloc] initWithNibName:@"UIBaseViewController" bundle:nil];
+    baseViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:baseViewController animated:YES];
 }
 

@@ -18,7 +18,7 @@
 @interface TTTabbar : UIToolbar
 @property (nullable, nonatomic, strong) NSArray <TTTabbarItemButton *> *tabBarItems;
 @property (nullable, nonatomic, weak) id<TTTabbarDelegate> tabBarDelegate;     // weak reference. default is nil
-@property (nonatomic, assign) NSUInteger selectedIndex; //cuurent selected Index default is 0
+@property (nonatomic, assign) NSUInteger selectedIndex;                                         //cuurent selected Index default  0
 @property (nullable, nonatomic, weak, readonly) TTTabbarItemButton *selectedItem; // will show feedback based on mode. default is nil
 @property (nonatomic, assign) BOOL showTopLine;
 

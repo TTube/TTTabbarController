@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0474A52D1D6998FB0074F121 /* UIViewController+TTTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 0474A52C1D6998FB0074F121 /* UIViewController+TTTabbar.m */; };
 		04805E4D1D3D431F001416F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04805E4C1D3D431F001416F0 /* main.m */; };
 		04805E501D3D431F001416F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04805E4F1D3D431F001416F0 /* AppDelegate.m */; };
 		04805E581D3D431F001416F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04805E571D3D431F001416F0 /* Assets.xcassets */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0474A52B1D6998FB0074F121 /* UIViewController+TTTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TTTabbar.h"; sourceTree = "<group>"; };
+		0474A52C1D6998FB0074F121 /* UIViewController+TTTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TTTabbar.m"; sourceTree = "<group>"; };
 		04805E481D3D431F001416F0 /* TTTabbarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTTabbarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04805E4C1D3D431F001416F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04805E4E1D3D431F001416F0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 				04805E591D3D431F001416F0 /* LaunchScreen.storyboard */,
 				04805E5C1D3D431F001416F0 /* Info.plist */,
 				04805E4B1D3D431F001416F0 /* Supporting Files */,
+				0474A52B1D6998FB0074F121 /* UIViewController+TTTabbar.h */,
+				0474A52C1D6998FB0074F121 /* UIViewController+TTTabbar.m */,
 			);
 			path = TTTabbarDemo;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04805E6B1D3D43C0001416F0 /* TTTabbarItemButton.m in Sources */,
+				0474A52D1D6998FB0074F121 /* UIViewController+TTTabbar.m in Sources */,
 				04805E6A1D3D43C0001416F0 /* TTTabBarController.m in Sources */,
 				04805E691D3D43C0001416F0 /* TTTabbar.m in Sources */,
 				04805E6F1D3D4401001416F0 /* UIBaseViewController.m in Sources */,

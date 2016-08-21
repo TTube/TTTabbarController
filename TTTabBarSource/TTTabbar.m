@@ -10,6 +10,31 @@
 #import "TTTabbarItemButton.h"
 #import <objc/runtime.h>
 
+@interface UITabBar (TTAddition)
+
+@end
+
+@implementation UITabBar (TTAddition)
++ (void)load {
+    Method original = class_getInstanceMethod(self, @selector(hitTest:withEvent:));
+    Method swizzle = class_getInstanceMethod(self, @selector(tt_hitTest:withEvent:));
+    method_exchangeImplementations(original, swizzle);
+}
+
+- (UIView *)tt_hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *hitview = [self tt_hitTest:point withEvent:event];
+    if (!hitview){
+        for (UIView *subView in self.subviews) {
+            UIView *subHitView = [subView hitTest:point withEvent:event];
+            if (subHitView){
+                return subHitView;
+            }
+        }
+    }
+    return hitview;
+}
+
+@end
 
 @interface TTTabbar ()
 @property (nonatomic, strong) UIImageView *topLineView;
@@ -62,6 +87,18 @@
     }
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *hitTest = [super hitTest:point withEvent:event];
+    if (!hitTest){
+        for (UIView *subView in self.subviews) {
+            CGPoint hitPoint = [self convertPoint:point toView:subView];
+            if ([subView pointInside:hitPoint withEvent:event]){
+                return subView;
+            }
+        }
+    }
+    return hitTest;
+}
 
 #pragma mark - public
 - (void)setTabBarItems:(NSArray<TTTabbarItemButton *> *)items animated:(BOOL)animated
@@ -114,6 +151,10 @@
 //        [item addGestureRecognizer:doubleTap];
         
         [item addTarget:self action:@selector(tabbarItemDidClick:) forControlEvents:UIControlEventTouchUpInside];
+        [item addTarget:self action:@selector(tabbarOnTouchDown:) forControlEvents:UIControlEventTouchDown];
+        [item addTarget:self action:@selector(tabbarOnTouchUp:) forControlEvents:UIControlEventTouchUpOutside];
+        [item addTarget:self action:@selector(tabbarOnTouchUp:) forControlEvents:UIControlEventTouchCancel];
+
         //add to subview and layout
         [self addSubview:item];
         if(index == self.selectedIndex){
@@ -162,6 +203,20 @@
     }
 }
 
+- (void)tabbarOnTouchDown:(TTTabbarItemButton *)item {
+    if (!item.currentConfig.highLightedWhenTouch){
+        return;
+    }
+    item.selected = YES;
+}
+
+- (void)tabbarOnTouchUp:(TTTabbarItemButton *)item {
+    if (item.selected || !item.currentConfig.highLightedWhenTouch){
+        return;
+    }
+    item.selected = NO;
+}
+
 #pragma mark - getter & setter
 - (void)setShowTopLine:(BOOL)showTopLine
 {
@@ -172,7 +227,6 @@
         }else{
             self.topLineView.hidden = NO;
         }
-//        [self.lineLayer setNeedsDisplay];
     }
 }
 

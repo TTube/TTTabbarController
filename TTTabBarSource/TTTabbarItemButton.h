@@ -20,6 +20,7 @@ extern const CGFloat kTabbarIconDefaultHeight;
 
 @interface TTTabbarItemButtonConfig : NSObject
 @property (nonatomic, assign) CGFloat specialHeight;        //针对一些特别的按钮 如闲鱼、ins的 中间"+"按钮，需要更高的高度,默认为0,即不个性化
+@property (nonatomic, assign) BOOL highLightedWhenTouch;
 //icon
 @property (nonatomic, strong) UIImage *normalImage;
 @property (nonatomic, strong) UIImage *selectedImage;

@@ -14,6 +14,7 @@
 @property (nonatomic, assign) NSUInteger defaultIndex;
 
 - (void)refreshView;
+- (void)refreshView:(BOOL)force;
 - (void)addController:(UIViewController *)controller withTabBarConfig:(TTTabbarItemButtonConfig *)config;
 - (void)removeController:(UIViewController *)controller;
 @end
